@@ -25,4 +25,8 @@ public class Superman {
     public String getNum() {
         return num;
     }
+
+    public String toString() {
+        return name + num;
+    }
 }

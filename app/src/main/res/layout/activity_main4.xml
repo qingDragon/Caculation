@@ -4,18 +4,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.yanzhuang.caculation.Main4Activity">
+    android:background="#02534a"
+    tools:context="com.example.yanzhuang.caculation.Main4Activity"
+    >
+
     <LinearLayout
-        android:layout_width="395dp"
-        android:layout_height="587dp"
-        tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="50"
+            android:background="#02534a">
+            <Button
+                android:id="@+id/b1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="刷新"
+                android:textAlignment="center"
+                android:layout_weight="1"
+                android:background="@drawable/btn_selector"
+                android:textColor="#ffffff"
+                />
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textColor="#ffffff"
+
+
+                android:text="通讯录"
+                android:layout_weight="48"/>
+            <Button
+                android:id="@+id/b2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="添加"
+                android:textAlignment="center"
+                android:layout_weight="1"
+                android:background="@drawable/btn_selector"
+                android:textColor="#ffffff"
+                />
+
+        </LinearLayout>
+
 
         <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/list_view">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_view"
+            android:layout_weight="1"
+            tools:layout_editor_absoluteY="48dp"
+            tools:layout_editor_absoluteX="0dp"
+            android:paddingRight="1px"
+            android:background="@drawable/list_shape">
 
         </ListView>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="619dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+
+            android:background="#02534a"
+            tools:layout_editor_absoluteY="610dp"
+            tools:layout_editor_absoluteX="8dp">
+            <Button
+                android:id="@+id/b3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="通讯"
+                android:textColor="#ffffff"
+                android:layout_weight="1"
+                android:textSize="15dp"
+                android:background="@drawable/btn_selector"
+                />
+            <Button
+                android:id="@+id/b4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="拨号器"
+                android:textColor="#ffffff"
+                android:layout_weight="1"
+                android:textSize="15dp"
+                android:background="@drawable/btn_selector"
+                />
+
+
+        </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

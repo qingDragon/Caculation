@@ -14,11 +14,14 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.text.style.SuperscriptSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,50 +30,52 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main4Activity extends AppCompatActivity {
+public class Main4Activity extends AppCompatActivity implements View.OnClickListener {
     private List<Superman> supermanList = new ArrayList<>();
     Superman superman;
+    String returnedData=null;
+    SupermanAdapter adapter;
+    ListView listView;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main4);
+        Button b1 = (Button) findViewById(R.id.b1);
+        Button b2 = (Button)findViewById(R.id.b2);
 
-        initSupermans();
-        SupermanAdapter adapter = new SupermanAdapter(this,R.layout.superman_item,supermanList);
-        ListView listView = (ListView) findViewById(R.id.list_view);
-        listView.setAdapter(adapter);
+
+
+        b2.setOnClickListener(this);
+        b1.setOnClickListener(this);
+
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 superman = supermanList.get(position);
-                /*if(ContextCompat.checkSelfPermission(Main4Activity.this, Manifest.permission.CALL_PHONE)!= PackageManager.PERMISSION_GRANTED){
-                    ActivityCompat.requestPermissions(Main4Activity.this,new String[] {Manifest.permission.CALL_PHONE},1);
-                } else{
-                    callPhone();
-                }*/
+
                 callPhone();
             }
         });
 
+
+
+
+
     }
-    /*@Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("activity",String.valueOf(requestCode));
         switch (requestCode) {
             case 1:
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    callPhone();
-                } else {
-                    Toast.makeText(getApplicationContext(), "授权失败", Toast.LENGTH_SHORT).show();
+                if(resultCode == 10) {
+                    this.returnedData =data.getStringExtra("data_return");
                 }
                 break;
             default:
-                break;
-
         }
-    }*/
+    }
     public void callPhone() {
 
         try {
@@ -84,20 +89,52 @@ public class Main4Activity extends AppCompatActivity {
         }
 
     }
-    private void initSupermans() {
-        for(int i=0; i<8; i++) {
 
-            Superman s1 = new Superman("我就像这个世界", R.drawable.img_1,"13813322995");
-            supermanList.add(s1);
 
-            Superman s2 = new Superman("永远不会被改变", R.drawable.img_1,"18936518056");
-            supermanList.add(s2);
+
+    @Override
+    public void onClick(View v) {
+        String[] s = null;
+        switch (v.getId()) {
+            case R.id.b2:
+                Intent intent = new Intent(Main4Activity.this,AddConnectorActivity.class);
+                startActivityForResult(intent,1);
+                break;
+            case R.id.b1:
+                if(this.returnedData==null){
+                    Log.d("123",returnedData);
+                }
+                else {
+                    s = returnedData.split("#");
+                }
+
+                Superman s1 = new Superman(s[0], R.drawable.img_3, s[1]);
+                this.supermanList.add(s1);
+                Log.d("sm",this.supermanList.get(0).toString());
+                adapter = new SupermanAdapter(this,R.layout.superman_item,this.supermanList);
+
+
+                listView = (ListView) findViewById(R.id.list_view);
+
+                listView.setAdapter(adapter);
+
+
+
+                break;
+
+
+
+
+
+            default:
 
 
         }
-
     }
+
+
 }
+
 
 
 
